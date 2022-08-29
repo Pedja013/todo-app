@@ -52,6 +52,11 @@ const Content = () => {
         setPrioritet('')
     };
 
+    const handleDelete = (id) => {
+        const removeArray = todos.filter((todo) => todo.id !== id);
+        setTodos(removeArray);
+    };
+
     return (
         <main className="todo-list pt-5">
             <Container>
@@ -117,7 +122,7 @@ const Content = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <ToDoList todos={todos} />
+                <ToDoList todos={todos} handleDelete={handleDelete} />
             </Container>
         </main>
     );

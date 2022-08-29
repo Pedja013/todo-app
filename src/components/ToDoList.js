@@ -7,7 +7,7 @@ const ToDoList = (props) => {
     return (
         <React.Fragment>
             {todos.map((todo) =>
-                <ToDo todo={todo} />
+                <ToDo todo={todo} handleDelete={props.handleDelete} key={todo.id} />
             )}
         </React.Fragment>
     );

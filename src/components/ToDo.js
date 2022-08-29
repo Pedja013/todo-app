@@ -26,7 +26,7 @@ const ToDo = (props) => {
                         <img src={editIcon} className="me-3 mb-4 mb-sm-0" alt="edit"/>
                     </Button>
                     <Button className="p-0">
-                        <img src={deleteIcon} className="me-3 mb-4 mb-sm-0" alt="delete" />
+                        <img src={deleteIcon} className="me-3 mb-4 mb-sm-0" alt="delete" onClick={() => props.handleDelete(props.todo.id)}/>
                     </Button>
                 </div>}
             </div>
