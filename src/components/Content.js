@@ -24,7 +24,9 @@ const Content = () => {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('todo-list', JSON.stringify(todos));
+        if (todos?.length) {
+            localStorage.setItem('todo-list', JSON.stringify(todos));
+        }
     }, [todos]);
 
     const nazivChangeHandler = (event) => {
