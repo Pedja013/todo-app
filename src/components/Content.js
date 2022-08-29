@@ -17,10 +17,18 @@ const Content = () => {
     const handleShow = () => {
         setShow(true)
         setNaziv('')
+        setNazivBlured(false)
         setRokPredaje('')
+        setRokBlured(false)
         setOpis('')
+        setOpisBlured(false)
         setPrioritet('')
+        setPrioritetBlured(false)
     };
+    const [nazivBlured, setNazivBlured] = useState(false);
+    const [rokBlured, setRokBlured] = useState(false);
+    const [opisBlured, setOpisBlured] = useState(false);
+    const [prioritetBlured, setPrioritetBlured] = useState(false);
 
     // actions
     useEffect(() => {
@@ -40,20 +48,58 @@ const Content = () => {
         setNaziv(event.target.value)
     };
 
+    const nazivBlurHandler = () => {
+        setNazivBlured(true)
+    };
+
     const rokChangeHandler = (event) => {
         setRokPredaje(event.target.value)
+    };
+
+    const rokBlurHandler = () => {
+        setRokBlured(true)
     };
 
     const opisChangeHandler = (event) => {
         setOpis(event.target.value)
     };
 
+    const opisBlurHandler = () => {
+        setOpisBlured(true)
+    };
+
     const prioritetChangeHandler = (event) => {
         setPrioritet(event.target.value)
     }
 
+    const prioritetBlurHandler = () => {
+        setPrioritetBlured(true)
+    }
+
+    // handling classes for form inputs
+    const nazivIsValid = naziv.trim() !== '' && naziv.trim().length < 100;
+    const nazivIsInvalid = !nazivIsValid && nazivBlured;
+    const nazivInputClasses = nazivIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+
+    const rokIsValid = rokPredaje.trim() !== '';
+    const rokIsInvalid = !rokIsValid && rokBlured
+    const rokInputClasses = rokIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+
+    const opisIsValid = opis.trim() !== '' && opis.trim().length < 100;
+    const opisIsInvalid = !opisIsValid && opisBlured;
+    const opisInputClasses = opisIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+
+    const prioritetIsValid = prioritet.trim() !== '';
+    const prioritetIsInvalid = !prioritetIsValid && prioritetBlured;
+    const prioritetInputClasses = prioritetIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (nazivIsInvalid || rokIsInvalid || opisIsInvalid || prioritetIsInvalid) {
+            return;
+        }
+
         if (id) {
             let oldTodos = [...todos]
             oldTodos.map(item => {
@@ -91,6 +137,7 @@ const Content = () => {
         setRokPredaje(currentTodo[0].rokPredaje)
         setOpis(currentTodo[0].opis)
         setPrioritet(currentTodo[0].prioritet)
+        setIsCompleted(currentTodo[0].isCompleted)
         setShow(true)
     }
 
@@ -124,44 +171,52 @@ const Content = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <form onSubmit={handleSubmit}>
-                            <input type="hidden" name="form-name" value="id" />
-                            <div className="form-control border-0 d-flex align-items-start">
+                            <input type="hidden" name="form-name" value={id} />
+                            <div className={nazivInputClasses}>
                                 <label className="me-3">Naziv:</label>
                                 <input
                                     required
                                     type="text"
                                     maxLength={100}
                                     onChange={nazivChangeHandler}
+                                    onBlur={nazivBlurHandler}
                                     value={naziv}
                                 ></input>
                             </div>
-                            <div className="form-control border-0 d-flex align-items-start">
+                            {nazivIsInvalid && <p className="ms-3 mb-0 d-flex justify-content-end error-msg">Molim vas unesite validan naziv (ne duzi od 100 karaktera).</p>}
+                            <div className={rokInputClasses}>
                                 <label className="me-3">Rok predaje:</label>
                                 <input
                                     type='date'
                                     min='0'
                                     max='2022-12-31'
                                     onChange={rokChangeHandler}
+                                    onBlur={rokBlurHandler}
                                     value={rokPredaje}
                                 />
                             </div>
-                            <div className="form-control border-0 d-flex align-items-start">
+                            {rokIsInvalid && <p className="ms-3 mb-0 d-flex justify-content-end error-msg">Molim vas unesite validan rok.</p>}
+                            <div className={opisInputClasses}>
                                 <label className="me-3">Opis:</label>
                                 <textarea
                                     maxLength={100}
                                     onChange={opisChangeHandler}
+                                    onBlur={opisBlurHandler}
                                     required
                                     value={opis}
                                 ></textarea>
                             </div>
-                            <div className="form-control border-0 d-flex align-items-start">
+                            {opisIsInvalid && <p className="ms-3 mb-0 d-flex justify-content-end error-msg">Molim vas unesite validan opis (ne duzi od 100 karaktera).</p>}
+                            <div className={prioritetInputClasses}>
                                 <label className="me-3">Rok predaje:</label>
-                                <select className="" id="rokPredaje" onChange={prioritetChangeHandler}>
+                                <select className="" id="rokPredaje" onChange={prioritetChangeHandler} onBlur={prioritetBlurHandler}>
+                                    <option></option>
                                     <option value="nizak">Nizak</option>
                                     <option value="srednji">Srednji</option>
                                     <option value="visok">Visok</option>
                                 </select>
                             </div>
+                            {prioritetIsInvalid && <p className="ms-3 mb-0 d-flex justify-content-end error-msg">Molim vas odaberite prioritet zadatka.</p>}
                         </form>
                     </Modal.Body>
                     <Modal.Footer className="d-flex justify-content-center">
