@@ -23,7 +23,7 @@ const ToDo = (props) => {
                 </div>
                 {canEdit && <div className="post__header-controls">
                     <Button className="me-3 p-0">
-                        <img src={editIcon} className="me-3 mb-4 mb-sm-0" alt="edit"/>
+                        <img src={editIcon} className="me-3 mb-4 mb-sm-0" alt="edit" onClick={() => props.handleShowEditModal(props.todo.id)}/>
                     </Button>
                     <Button className="p-0">
                         <img src={deleteIcon} className="me-3 mb-4 mb-sm-0" alt="delete" onClick={() => props.handleDelete(props.todo.id)}/>

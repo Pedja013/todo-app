@@ -13,6 +13,7 @@ const Content = () => {
     const [opis, setOpis] = useState('');
     const [prioritet, setPrioritet] = useState('');
     const [todos, setTodos] = useState([]);
+    const [id, setId] = useState('');
 
     // actions
     useEffect(() => {
@@ -42,9 +43,24 @@ const Content = () => {
         setPrioritet(event.target.value)
     }
 
-    const handleSubmit = () => {
-        let todo = { id: Math.random().toString(), naziv, rokPredaje, opis, prioritet };
-        setTodos([todo, ...todos]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (id) {
+            let oldTodos = [...todos]
+            oldTodos.map(item => {
+                if (id == item.id) {
+                    item.naziv = naziv;
+                    item.rokPredaje = rokPredaje;
+                    item.opis = opis;
+                    item.prioritet = prioritet;
+                }
+                return item;
+            });
+            setTodos(oldTodos);
+        } else {
+            let todo = { id: Math.random().toString(), naziv, rokPredaje, opis, prioritet };
+            setTodos([todo, ...todos]);
+        }
         setShow(false)
         setNaziv('')
         setRokPredaje('')
@@ -56,6 +72,17 @@ const Content = () => {
         const removeArray = todos.filter((todo) => todo.id !== id);
         setTodos(removeArray);
     };
+
+    const handleShowEditModal = (todoId) => {
+        const currentTodo = todos.filter(item => item.id === todoId);
+        console.log('handleShowEditModal');
+        setId(currentTodo[0].id)
+        setNaziv(currentTodo[0].naziv)
+        setRokPredaje(currentTodo[0].rokPredaje)
+        setOpis(currentTodo[0].opis)
+        setPrioritet(currentTodo[0].prioritet)
+        setShow(true)
+    }
 
     return (
         <main className="todo-list pt-5">
@@ -84,6 +111,7 @@ const Content = () => {
                                     type="text"
                                     maxLength={100}
                                     onChange={nazivChangeHandler}
+                                    value={naziv}
                                 ></input>
                             </div>
                             <div className="form-control border-0 d-flex align-items-start">
@@ -93,6 +121,7 @@ const Content = () => {
                                     min='0'
                                     max='2022-12-31'
                                     onChange={rokChangeHandler}
+                                    value={rokPredaje}
                                 />
                             </div>
                             <div className="form-control border-0 d-flex align-items-start">
@@ -101,6 +130,7 @@ const Content = () => {
                                     maxLength={100}
                                     onChange={opisChangeHandler}
                                     required
+                                    value={opis}
                                 ></textarea>
                             </div>
                             <div className="form-control border-0 d-flex align-items-start">
@@ -122,7 +152,7 @@ const Content = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <ToDoList todos={todos} handleDelete={handleDelete} />
+                <ToDoList todos={todos} handleDelete={handleDelete} handleShowEditModal={handleShowEditModal} />
             </Container>
         </main>
     );
