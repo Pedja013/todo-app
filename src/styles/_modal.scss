@@ -6,4 +6,13 @@
     input, textarea, select {
         min-width: 86%;
     }
+
+    .form-control.error input {
+        border-color: red;
+        background: #fbdada;
+    }
+
+    .error-msg {
+        color: red;
+    }
 }

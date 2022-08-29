@@ -1,0 +1,46 @@
+.todo {
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    border: 0;
+    .todo__header-controls {
+        button {
+            background: none;
+            border: 0;
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+
+    .todo__content {
+        max-height: 100px;
+        overflow-y: auto;
+    }
+
+    &.bg-success {
+        .todo__content {
+            text-decoration: line-through;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .todo__header {
+            flex-direction: column;
+
+            .todo__header-info,
+            .todo__header-controls,
+            .todo__completed-text {
+                align-self: flex-start;
+            }
+
+            .todo__header-info {
+                order: 2;
+            }
+
+            .todo__header-controls {
+                order: 1;
+            }
+        }
+    }
+}

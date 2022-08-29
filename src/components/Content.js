@@ -79,19 +79,19 @@ const Content = () => {
     // handling classes for form inputs
     const nazivIsValid = naziv.trim() !== '' && naziv.trim().length < 100;
     const nazivIsInvalid = !nazivIsValid && nazivBlured;
-    const nazivInputClasses = nazivIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+    const nazivInputClasses = nazivIsInvalid ? 'form-control border-0 d-block d-sm-flex align-items-start error' : 'form-control border-0 d-block d-sm-flex align-items-start';
 
     const rokIsValid = rokPredaje.trim() !== '';
     const rokIsInvalid = !rokIsValid && rokBlured
-    const rokInputClasses = rokIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+    const rokInputClasses = rokIsInvalid ? 'form-control border-0 d-block d-sm-flex align-items-start error' : 'form-control border-0 d-block d-sm-flex align-items-start';
 
     const opisIsValid = opis.trim() !== '' && opis.trim().length < 100;
     const opisIsInvalid = !opisIsValid && opisBlured;
-    const opisInputClasses = opisIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+    const opisInputClasses = opisIsInvalid ? 'form-control border-0 d-block d-sm-flex align-items-start error' : 'form-control border-0 d-block d-sm-flex align-items-start';
 
     const prioritetIsValid = prioritet.trim() !== '';
     const prioritetIsInvalid = !prioritetIsValid && prioritetBlured;
-    const prioritetInputClasses = prioritetIsInvalid ? 'form-control border-0 d-flex align-items-start error' : 'form-control border-0 d-flex align-items-start';
+    const prioritetInputClasses = prioritetIsInvalid ? 'form-control border-0 d-block d-sm-flex align-items-start error' : 'form-control border-0 d-block d-sm-flex align-items-start';
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -159,8 +159,8 @@ const Content = () => {
                     <Col lg={6}>
                         <h1 className="todo-list--title">Lista zadataka</h1>
                     </Col>
-                    <Col lg={6} className="d-flex justify-content-end">
-                        <Button className="todo-list--add-new-btn btn btn-dark" onClick={handleShow}>Dodaj</Button>
+                    <Col lg={6} className="d-flex justify-content-lg-end">
+                        <Button className="todo-list--add-new-btn btn btn-dark btn-lg" onClick={handleShow}>Dodaj</Button>
                     </Col>
                 </Row>
                 <Modal show={show} onHide={handleClose} size="lg"
