@@ -6,14 +6,21 @@ import ToDoList from "./ToDoList";
 const Content = () => {
     // states
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [naziv, setNaziv] = useState('');
     const [rokPredaje, setRokPredaje] = useState('');
     const [opis, setOpis] = useState('');
     const [prioritet, setPrioritet] = useState('');
     const [todos, setTodos] = useState([]);
     const [id, setId] = useState('');
+    const [isCompleted, setIsCompleted] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true)
+        setNaziv('')
+        setRokPredaje('')
+        setOpis('')
+        setPrioritet('')
+    };
 
     // actions
     useEffect(() => {
@@ -55,12 +62,13 @@ const Content = () => {
                     item.rokPredaje = rokPredaje;
                     item.opis = opis;
                     item.prioritet = prioritet;
+                    item.isCompleted = isCompleted;
                 }
                 return item;
             });
             setTodos(oldTodos);
         } else {
-            let todo = { id: Math.random().toString(), naziv, rokPredaje, opis, prioritet };
+            let todo = { id: Math.random().toString(), naziv, rokPredaje, opis, prioritet, isCompleted };
             setTodos([todo, ...todos]);
         }
         setShow(false)
@@ -85,6 +93,17 @@ const Content = () => {
         setPrioritet(currentTodo[0].prioritet)
         setShow(true)
     }
+
+    const handleComplete = (todoId) => {
+        let currentTodos = [...todos]
+        currentTodos.map(item => {
+            if (todoId == item.id) {
+                item.isCompleted = true;
+            }
+            return item;
+        });
+        setTodos(currentTodos);
+    };
 
     return (
         <main className="todo-list pt-5">
@@ -154,7 +173,7 @@ const Content = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <ToDoList todos={todos} handleDelete={handleDelete} handleShowEditModal={handleShowEditModal} />
+                <ToDoList todos={todos} handleDelete={handleDelete} handleShowEditModal={handleShowEditModal} handleComplete={handleComplete} />
             </Container>
         </main>
     );

@@ -7,7 +7,12 @@ const ToDoList = (props) => {
     return (
         <React.Fragment>
             {todos.map((todo) =>
-                <ToDo todo={todo} handleDelete={props.handleDelete} handleShowEditModal={props.handleShowEditModal} key={todo.id} />
+                <ToDo todo={todo}
+                      handleDelete={props.handleDelete}
+                      handleShowEditModal={props.handleShowEditModal}
+                      handleComplete={props.handleComplete}
+                      key={todo.id}
+                />
             )}
         </React.Fragment>
     );
