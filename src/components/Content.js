@@ -13,9 +13,12 @@ const Content = () => {
     const [todos, setTodos] = useState([]);
     const [id, setId] = useState('');
     const [isCompleted, setIsCompleted] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setShow(true)
+    const [nazivBlured, setNazivBlured] = useState(false);
+    const [rokBlured, setRokBlured] = useState(false);
+    const [opisBlured, setOpisBlured] = useState(false);
+    const [prioritetBlured, setPrioritetBlured] = useState(false);
+    const handleClose = () => {
+        setShow(false)
         setNaziv('')
         setNazivBlured(false)
         setRokPredaje('')
@@ -25,10 +28,7 @@ const Content = () => {
         setPrioritet('')
         setPrioritetBlured(false)
     };
-    const [nazivBlured, setNazivBlured] = useState(false);
-    const [rokBlured, setRokBlured] = useState(false);
-    const [opisBlured, setOpisBlured] = useState(false);
-    const [prioritetBlured, setPrioritetBlured] = useState(false);
+    const handleShow = () => setShow(true);
 
     // actions
     useEffect(() => {
@@ -119,9 +119,13 @@ const Content = () => {
         }
         setShow(false)
         setNaziv('')
+        setNazivBlured(false)
         setRokPredaje('')
+        setRokBlured(false)
         setOpis('')
+        setOpisBlured(false)
         setPrioritet('')
+        setPrioritetBlured(false)
     };
 
     const handleDelete = (id) => {
@@ -151,6 +155,20 @@ const Content = () => {
         });
         setTodos(currentTodos);
     };
+
+    // custom method for setting min day of datepicker to today
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+    if (dd < 10){
+        dd = '0' + dd
+    }
+    if (mm < 10){
+        mm = '0' + mm
+    }
+
+    today = yyyy+'-'+mm+'-'+dd;
 
     return (
         <main className="todo-list pt-5">
@@ -188,7 +206,7 @@ const Content = () => {
                                 <label className="me-3">Rok predaje:</label>
                                 <input
                                     type='date'
-                                    min='0'
+                                    min={today}
                                     max='2022-12-31'
                                     onChange={rokChangeHandler}
                                     onBlur={rokBlurHandler}
@@ -209,7 +227,7 @@ const Content = () => {
                             {opisIsInvalid && <p className="ms-3 mb-0 d-flex justify-content-end error-msg">Molim vas unesite validan opis (ne duzi od 100 karaktera).</p>}
                             <div className={prioritetInputClasses}>
                                 <label className="me-3">Rok predaje:</label>
-                                <select className="" id="rokPredaje" onChange={prioritetChangeHandler} onBlur={prioritetBlurHandler}>
+                                <select className="" id="rokPredaje" onChange={prioritetChangeHandler} onBlur={prioritetBlurHandler} value={prioritet}>
                                     <option></option>
                                     <option value="nizak">Nizak</option>
                                     <option value="srednji">Srednji</option>

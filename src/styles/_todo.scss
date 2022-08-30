@@ -19,7 +19,8 @@
     }
 
     &.bg-success {
-        .todo__content {
+        .todo__content,
+        .todo__header-info {
             text-decoration: line-through;
         }
     }

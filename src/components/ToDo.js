@@ -26,13 +26,13 @@ const ToDo = (props) => {
                 </div>
                 {canEdit && <div className="todo__header-controls">
                     <Button className="me-3 p-0">
-                        <img src={editIcon} className="me-3 mb-4 mb-sm-0" alt="edit" onClick={() => props.handleShowEditModal(props.todo.id)}/>
+                        <img src={editIcon} className="me-3 mb-4 mb-sm-0" alt="edit" title="Edit" onClick={() => props.handleShowEditModal(props.todo.id)}/>
                     </Button>
                     <Button className="p-0">
-                        <img src={deleteIcon} className="me-3 mb-4 mb-sm-0" alt="delete" onClick={() => props.handleDelete(props.todo.id)}/>
+                        <img src={deleteIcon} className="me-3 mb-4 mb-sm-0" alt="delete" title="Delete" onClick={() => props.handleDelete(props.todo.id)}/>
                     </Button>
                     <Button>
-                        <img src={completeIcon} className="me-3 mb-4 mb-sm-0" alt="complete" onClick={() => props.handleComplete(props.todo.id)}/>
+                        <img src={completeIcon} className="me-3 mb-4 mb-sm-0" alt="complete" title="Complete" onClick={() => props.handleComplete(props.todo.id)}/>
                     </Button>
                 </div>}
                 {!canEdit && <div className="todo__completed-text mb-3">Zadatak zavrsen!</div>}
