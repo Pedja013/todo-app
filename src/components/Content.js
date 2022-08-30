@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Container, Modal, Row} from "react-bootstrap";
-import "../styles/main.scss";
+import "../styles/main.css";
 import ToDoList from "./ToDoList";
 
 const Content = () => {

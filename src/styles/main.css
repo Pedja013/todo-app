@@ -1,0 +1,38 @@
+.add-todo-modal label {
+  min-width: 13%; }
+.add-todo-modal input, .add-todo-modal textarea, .add-todo-modal select {
+  min-width: 86%; }
+.add-todo-modal .form-control.error input {
+  border-color: red;
+  background: #fbdada; }
+.add-todo-modal .error-msg {
+  color: red; }
+
+.todo {
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  border: 0; }
+  .todo .todo__header-controls button {
+    background: none;
+    border: 0; }
+    .todo .todo__header-controls button img {
+      width: 30px;
+      height: 30px; }
+  .todo .todo__content {
+    max-height: 100px;
+    overflow-y: auto; }
+  .todo.bg-success .todo__content,
+  .todo.bg-success .todo__header-info {
+    text-decoration: line-through; }
+  @media (max-width: 576px) {
+    .todo .todo__header {
+      flex-direction: column; }
+      .todo .todo__header .todo__header-info,
+      .todo .todo__header .todo__header-controls,
+      .todo .todo__header .todo__completed-text {
+        align-self: flex-start; }
+      .todo .todo__header .todo__header-info {
+        order: 2; }
+      .todo .todo__header .todo__header-controls {
+        order: 1; } }
+
+/*# sourceMappingURL=main.css.map */
